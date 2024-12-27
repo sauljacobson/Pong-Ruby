@@ -48,30 +48,45 @@ on :key_held do |event|
     end
   elsif event.key == 'space'
     if pong.reset? 
-      pong.speed = 8 
+      pong.x_speed = 8 
+      pong.y_speed = 8
     end
   end 
 end 
 
-update do
-  puts "#{pong.ball.x}"
+
+update do  
+  if pong.at_top?
+    pong.y_speed = -pong.y_speed
+  end
+
+  if pong.at_bottom?
+    pong.y_speed = -pong.y_speed 
+  end 
+
   if player1.hit?(pong)
-    pong.speed = 8
+    pong.x_speed = 8
   elsif player2.hit?(pong) 
-    pong.speed = -8
+    pong.x_speed = -8
   elsif pong.left_edge?
-    pong.speed = 0
+    pong.x_speed = 0
+    pong.y_speed = 0
     pong.ball.x = get(:width) / 2
+    pong.ball.y = get(:height) / 2
     player2.score += 1
     player2_score.text = (player2.score).to_s
   elsif pong.right_edge? 
-    pong.speed = 0
+    pong.x_speed = 0
+    pong.y_speed = 0
     pong.ball.x = get(:width) / 2 
+    pong.ball.y = get(:height) / 2
     player1.score += 1
     player1_score.text = (player1.score).to_s
   end
-  pong.ball.x += pong.speed   
+  pong.ball.x += pong.x_speed
+  pong.ball.y += pong.y_speed 
 end
 
 
 show
+

@@ -1,14 +1,15 @@
 require 'ruby2d' 
 
 class Pong
-    attr_accessor :ball, :speed 
+    attr_accessor :ball, :x_speed, :y_speed 
 
     def initialize()
       @ball = Circle.new(
         x: 320, y: 240,
         radius: 9, color: 'white'       
       )
-      @speed = 8 
+      @x_speed = 8 
+      @y_speed = 8 
     end
 
     def left_edge?()  
@@ -19,7 +20,15 @@ class Pong
       @ball.x > 670 
     end
 
-   def reset?() 
+    def at_top?()
+      @ball.y + @ball.radius  <= 0
+    end
+
+    def at_bottom?() 
+      @ball.y + @ball.radius >= 480 
+    end
+
+    def reset?() 
      @ball.x == 320 
-   end 
+    end 
 end
