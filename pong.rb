@@ -18,4 +18,8 @@ class Pong
     def right_edge?()
       @ball.x > 670 
     end
+
+   def reset?() 
+     @ball.x == 320 
+   end 
 end
