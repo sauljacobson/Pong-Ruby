@@ -21,10 +21,6 @@ score_bar = Rectangle.new(
 
 paddle_speed = 10
 
-=begin
-
-=end
-
 on :key_held do |event|
   if event.key == 'w'
     if player1.at_top?
@@ -53,29 +49,7 @@ on :key_held do |event|
   end 
 end 
 
-#pong_speed = 4
-
-=begin
 update do
-  if paddle1_hit?(paddle1, pong)
-    pong_speed = 8
-  elsif paddle2_hit?(paddle2, pong) 
-    pong_speed = -8
-  elsif pong.x > 670
-    pong_speed = -8
-    pong.x = get(:width) / 2 
-    player1_score.text = (player1_score.text.to_i + 1).to_s
-  elsif pong.x < -30
-    pong_speed = 8
-    pong.x = get(:width) / 2
-    player2_score.text = (player2_score.text.to_i + 1).to_s 
-  end
-  pong.x += pong_speed   
-end
-=end
-
-update do
-  puts "#{pong.ball.x}"
   if player1.hit?(pong)
     pong.speed = 8
   elsif player2.hit?(pong) 
